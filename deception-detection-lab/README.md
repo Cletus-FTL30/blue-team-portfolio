@@ -88,7 +88,7 @@ looting and rule 100300 fired with `command: grep`. Full chain in
 
 Real troubleshooting, captured as it happened:
 
-- **Same-subnet ≠ same-segment.** The agent was healthy locally but `disconnected` at the
+- **Same-subnet != same-segment.** The agent was healthy locally but `disconnected` at the
   manager. Systematic elimination (service, config, firewalls, forced-interface ping) plus a
   `FAILED` ARP entry isolated the cause: multi-homed VMs with matching IPs on *different*
   VMnets. Fix: one adapter per VM + a static SIEM IP.
