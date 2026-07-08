@@ -1,0 +1,30 @@
+<!--
+  Wazuh custom rules for the AWS credentials honeytoken (ADS-001).
+  Location on the manager: /var/ossec/etc/rules/local_rules.xml
+
+  100300 - alerts (level 12) on any auditd-flagged access to the honeytoken.
+           Chained as a CHILD of base audit rule 80700 via <if_sid> so it is
+           evaluated after the parent fires (a <decoded_as> sibling never runs).
+  100301 - suppression (level 0) for Wazuh's own wazuh-syscheckd FIM self-scans.
+           Matches the DECODED exe path /var/ossec/bin/wazuh$ (the decoder
+           truncates "wazuh-syscheckd" at the hyphen).
+-->
+<group name="honeytoken,deception,">
+
+  <rule id="100300" level="12">
+    <if_sid>80700</if_sid>
+    <field name="audit.key">honeytoken_aws</field>
+    <description>Deception Alert: AWS credentials honeytoken accessed - possible intruder</description>
+    <mitre>
+      <id>T1552.001</id>
+    </mitre>
+    <group>honeytoken_access,</group>
+  </rule>
+
+  <rule id="100301" level="0">
+    <if_sid>100300</if_sid>
+    <field name="audit.exe">/var/ossec/bin/wazuh$</field>
+    <description>Honeytoken read by Wazuh syscheckd self-scan - ignored</description>
+  </rule>
+
+</group>

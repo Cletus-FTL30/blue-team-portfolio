@@ -1,0 +1,13 @@
+# Lab working data - downloads, datasets, installers (never commit these)
+*/lab/
+*.deb
+*.tgz
+*.tar.gz
+*.zip
+
+# Private working notes - kept locally, never published
+_private/
+
+# OS / editor noise
+.DS_Store
+*.swp

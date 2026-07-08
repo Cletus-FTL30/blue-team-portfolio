@@ -1,0 +1,10 @@
+# auditd watch for the AWS credentials honeytoken (ADS-001).
+# Location on the target host: /etc/audit/rules.d/honeytoken.rules
+# Load with:  sudo augenrules --load    (persists across reboot)
+# Verify with: sudo auditctl -l
+#
+# -p rwxa captures read, write, execute and attribute changes.
+# The READ permission (r) is the critical one: credential theft is a read,
+# which File Integrity Monitoring alone cannot detect (FIM only sees changes).
+
+-w /home/cletus1/.aws/credentials -p rwxa -k honeytoken_aws
