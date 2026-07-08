@@ -30,8 +30,7 @@ an intruder. Built on a 4-VM lab (Wazuh SIEM, Ubuntu target, Kali attacker,
 analyst workstation) with `auditd` for read-level detection and custom Wazuh
 rules - including a suppression rule so the system never alerts on itself. Proven
 against a live reverse-shell + credential-sweep attack, mapped to MITRE ATT&CK
-T1552.001. See [`HANDOVER.md`](./deception-detection-lab/HANDOVER.md) for the
-full write-up.
+T1552.001.
 
 ---
 
